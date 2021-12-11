@@ -1,0 +1,3 @@
+0. Nothing else should be rendered on the screen, other than specified.
+1. The text "Hello, World!" should be rendered to the screen.
+2. The text "Hello, World!" should be designated as an ARIA "heading".
