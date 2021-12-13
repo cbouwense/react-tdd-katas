@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 
 describe("App", () => {
@@ -30,6 +30,28 @@ describe("App", () => {
       it("should display a counter value of \"0\"", () => {
          const counterValue = screen.getByRole("status");
          expect(counterValue.textContent).toBe("0");
+      });
+   });
+
+   describe("when the user clicks on the decrement button", () => {
+      it("should subtract one from the counter value", async () => {
+         const decrementButton = screen.getByRole("button", { name: "-" });
+
+         fireEvent.click(decrementButton);
+         await waitFor(() => screen.getByRole("status"));
+
+         expect(screen.getByRole("status").textContent).toBe("-1");
+      });
+   });
+
+   describe("when the user clicks on the increment button", () => {
+      it("should add one to the counter value", async () => {
+         const incrementButton = screen.getByRole("button", { name: "+" });
+
+         fireEvent.click(incrementButton);
+         await waitFor(() => screen.getByRole("status"));
+
+         expect(screen.getByRole("status").textContent).toBe("1");
       });
    });
 });
