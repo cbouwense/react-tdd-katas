@@ -1,8 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
-  return <h1>Counter: </h1>
-}
-
-export default App;
+export default () => (
+   <>
+      <h1>Counter: <span role="status">0</span></h1>
+      <button>-</button>
+      <button>+</button>
+   </>
+);
