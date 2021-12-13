@@ -1,0 +1,7 @@
+- The text "Counter: " should be rendered.
+- Some text representing the current value of the counter should be rendered.
+- A button with the name "-" should be rendered.
+- A button with the name "+" should be rendered. 
+- The default value of the counter should be zero.
+- The minus button should decrement the counter's value by one on-click.
+- The plus button should increment the counter's value by one on-click.
