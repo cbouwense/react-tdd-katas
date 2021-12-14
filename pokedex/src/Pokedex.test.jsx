@@ -1,16 +1,8 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import { Pokedex } from "./Pokedex";
 import { getPokemon } from "./adapters/storageAdapter";
 
 jest.mock("./adapters/storageAdapter");
-
-beforeAll(() => {
-   jest.useFakeTimers();
-});
-
-afterAll(() => {
-   jest.useRealTimers();
-});
 
 describe("given the pokemon data is not available to the client", () => {
    let loadingStatus;
@@ -30,19 +22,7 @@ describe("given the pokemon data is not available to the client", () => {
       });
 
       it("should request the pokemon once", async () => {
-         getPokemon.mockResolvedValue([]);
          await waitFor(() => expect(getPokemon).toHaveBeenCalledTimes(1));
-      });
-   });
-
-   xdescribe("when the pokemon have become available to the client", () => {
-      beforeEach(() => {
-         render(<Pokedex />);
-         loadingStatus = screen.getByRole("status");
-      });
-      
-      it("should stop rendering the loading status", () => {
-         expect(loadingStatus).not.toBeInTheDocument();
       });
    });
 });

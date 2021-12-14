@@ -19,8 +19,6 @@ const usePokedex = () => {
 export const Pokedex = () => {
    const { pokemon } = usePokedex();
 
-   console.log({ pokemon });
-
    if (!pokemon) return <p role="status">loading...</p>;
    return <p>done!</p>;
 };
