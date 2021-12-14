@@ -1,0 +1,15 @@
+Given the pokemon data is not available client-side:
+When the page is viewed
+Then
+- the page should render the text "loading...".
+- the loading text should have a role of "status".
+
+Given the pokemon data is available client-side:
+When the page is viewed
+Then
+- This list should be a series of cards (chunks of information), one for each pokemon.
+- Each cards should feature a pokemon name, id, types, and default sprite.
+- The name should have a role of "heading".
+- The id should have a role of "paragraph".
+- The types should be encapsulated by ordered list with a role of "list".
+- The types should each have a role of "listitem".
