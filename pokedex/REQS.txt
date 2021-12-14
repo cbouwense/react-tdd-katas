@@ -1,10 +1,14 @@
-Given the pokemon data is not available client-side:
-When the page is viewed
+Given the pokemon data is not available to the client
+When the pokemon have yet to become available to the client
 Then
 - the page should render the text "loading...".
 - the loading text should have a role of "status".
+- the first generation of pokemon should be requested
 
-Given the pokemon data is available client-side:
+Given the pokemon data is not available to the client
+When the data becomes available to the client
+or
+Given the pokemon data is available to the client
 When the page is viewed
 Then
 - This list should be a series of cards (chunks of information), one for each pokemon.
