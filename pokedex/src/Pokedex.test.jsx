@@ -1,4 +1,4 @@
-import { render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Pokedex } from "./Pokedex";
 import { getPokemon } from "./adapters/storageAdapter";
 
@@ -22,7 +22,7 @@ describe("given the pokemon data is not available to the client", () => {
       });
 
       it("should request the pokemon once", async () => {
-         await waitFor(() => expect(getPokemon).toHaveBeenCalledTimes(1));
+         expect(getPokemon).toHaveBeenCalledTimes(1);
       });
    });
 });
