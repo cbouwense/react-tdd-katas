@@ -1,15 +1,26 @@
-import React, { useEffect } from "react";
-import { getPokemon } from "./services/storageAdapter";
-import "./App.css";
+import React, { useEffect, useState } from "react";
+import { getPokemon } from "./adapters/storageAdapter";
 
 const usePokedex = () => {
+   const [ pokemon, setPokemon ] = useState();
+   
    useEffect(() => {
-      getPokemon();
+      console.log("in useEffect")
+      async function getAndSetPokemon() {
+         setPokemon(await getPokemon());
+      }
+      getAndSetPokemon();
+      console.log("after getAndSetPokemon")
    }, []);
+
+   return { pokemon };
 };
 
 export const Pokedex = () => {
-   usePokedex();
+   const { pokemon } = usePokedex();
 
-   return <p role="status">loading...</p>;
+   console.log({ pokemon });
+
+   if (!pokemon) return <p role="status">loading...</p>;
+   return <p>done!</p>;
 };

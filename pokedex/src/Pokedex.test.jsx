@@ -1,21 +1,27 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { Pokedex } from "./Pokedex";
-import { getPokemon } from "./services/storageAdapter";
+import { getPokemon } from "./adapters/storageAdapter";
 
-jest.mock("./services/storageAdapter", () => ({ 
-   getPokemon: jest.fn(),
-}));
+jest.mock("./adapters/storageAdapter");
+
+beforeAll(() => {
+   jest.useFakeTimers();
+});
+
+afterAll(() => {
+   jest.useRealTimers();
+});
 
 describe("given the pokemon data is not available to the client", () => {
+   let loadingStatus;
+   
    describe("when the pokemon have yet to become available to the client", () => {
-      let loadingStatus;
-      
       beforeEach(() => {
          render(<Pokedex />);
          loadingStatus = screen.getByRole("status");
       });
       
-      it("should render a status indicating that the page is loading pokemon", () => {
+      it("should render a status indicating that the page is loading pokemon", async () => {
          expect(loadingStatus).toBeInTheDocument();
       });
 
@@ -23,8 +29,20 @@ describe("given the pokemon data is not available to the client", () => {
          expect(loadingStatus.textContent).toBe("loading...");
       });
 
-      it("should request the pokemon once", () => {
-         expect(getPokemon).toHaveBeenCalledTimes(1);
+      it("should request the pokemon once", async () => {
+         getPokemon.mockResolvedValue([]);
+         await waitFor(() => expect(getPokemon).toHaveBeenCalledTimes(1));
+      });
+   });
+
+   xdescribe("when the pokemon have become available to the client", () => {
+      beforeEach(() => {
+         render(<Pokedex />);
+         loadingStatus = screen.getByRole("status");
+      });
+      
+      it("should stop rendering the loading status", () => {
+         expect(loadingStatus).not.toBeInTheDocument();
       });
    });
 });
