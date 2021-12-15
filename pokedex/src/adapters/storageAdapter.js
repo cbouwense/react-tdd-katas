@@ -1,3 +1,1 @@
-export const getPokemon = async () => {
-   return [];
-};
+export const getPokemon = async () => [];

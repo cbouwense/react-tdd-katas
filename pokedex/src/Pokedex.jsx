@@ -6,7 +6,9 @@ export const Pokedex = () => {
    
    useEffect(() => {
       async function getAndSetPokemon() {
-         getPokemon().then(setPokemon);
+         getPokemon().then(p => {
+            setPokemon(() => p)
+         });
       }
       getAndSetPokemon();
    }, []);

@@ -1,31 +1,29 @@
-import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { Pokedex } from "./Pokedex";
 import { getPokemon } from "./adapters/storageAdapter";
 
 jest.mock("./adapters/storageAdapter");
 
-describe("given the pokemon data is not available to the client", () => {
+const remainingComponentUpdatesToAvoidActWarnings = async () => {
+   await act(async () => { await Promise.resolve() });
+}
+
+describe("Pokedex", () => {
    describe("when the pokemon have yet to become available to the client", () => {
       beforeEach(() => {
-         getPokemon.mockResolvedValue("mock res");
+         getPokemon.mockResolvedValue("mock pokemon data");
       });
       
-      it("should render a status indicating that the page is loading pokemon", async () => {
-         render(<Pokedex />);
-         expect(screen.getByRole("status")).toBeInTheDocument();
-         await waitForElementToBeRemoved(() => screen.getByRole("status"));
-      });
-
-      it("should render that status with the text \"loading...\"", async () => {
+      it("should render some status text saying \"loading...\"", async () => {
          render(<Pokedex />);
          expect(screen.getByRole("status").textContent).toBe("loading...");
-         await waitForElementToBeRemoved(() => screen.getByRole("status"));
+         await remainingComponentUpdatesToAvoidActWarnings();
       });
-
-      it("should request the pokemon once", async () => {
+   
+      it("should make one attempt to get the pokemon data", async () => {
          render(<Pokedex />);
          expect(getPokemon).toHaveBeenCalledTimes(1);
-         await waitForElementToBeRemoved(() => screen.getByRole("status"));
+         await remainingComponentUpdatesToAvoidActWarnings();
       });
    });
 });
