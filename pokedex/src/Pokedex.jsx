@@ -14,5 +14,5 @@ export const Pokedex = () => {
    }, []);
 
    if (!pokemon) return <p role="status">loading...</p>;
-   return <p>done!</p>;
+   return <p role="status">done!</p>;
 };
