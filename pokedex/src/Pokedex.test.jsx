@@ -61,4 +61,3 @@ describe("given we have sent off the request for the pokemon", () => {
       });
    });
 });
-
