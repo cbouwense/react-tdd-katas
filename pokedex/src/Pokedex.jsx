@@ -25,5 +25,5 @@ export const Pokedex = () => {
 
    if (error) return <p role="status">{error}</p>;
    if (!pokemon) return <p role="status">loading...</p>;
-   return <p role="status">done!</p>;
+   return <ul>{pokemon.results.map(p => <li key={p.name}></li>)}</ul>;
 };

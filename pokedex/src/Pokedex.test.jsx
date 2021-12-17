@@ -29,13 +29,35 @@ describe("when the pokemon have yet to become available to the client", () => {
 });
 
 describe("given we have sent off the request for the pokemon", () => {      
-   describe("when there is an error response", () => {         
+   describe("when there is a 400 error status", () => {         
+      it("should display a status with the error message", async () => {
+         server.use(rest.get("https://pokeapi.co/api/v2/pokemon/", (_, res, ctx) => {
+            return res(ctx.status(404));
+         }));
+         render(<Pokedex />);
+         await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Not Found"));
+      });
+   });
+   
+   describe("when there is a 500 error status", () => {         
       it("should display a status with the error message", async () => {
          server.use(rest.get("https://pokeapi.co/api/v2/pokemon/", (_, res, ctx) => {
             return res(ctx.status(500));
          }));
          render(<Pokedex />);
          await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Internal Server Error"));
+      });
+   });
+
+   describe("when is a valid response", () => {         
+      it("should display a list to contain the pokemon", async () => {
+         render(<Pokedex />);
+         await waitFor(() => expect(screen.getByRole("list")).toBeInTheDocument());
+      });
+
+      it("should display one card for each pokemon in that list", async () => {
+         render(<Pokedex />);
+         await waitFor(() => expect(screen.getAllByRole("listitem")).toHaveLength(3));
       });
    });
 });
