@@ -3,7 +3,7 @@ import { Pokedex } from "./Pokedex";
 import * as adapters from "./adapters/storageAdapter";
 import { makeServerReturnAStatusOf } from "./mockServiceWorker";
 
-afterEach(async () => {
+afterEach(() => {
    jest.restoreAllMocks();
 });
 
