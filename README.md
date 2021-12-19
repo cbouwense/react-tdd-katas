@@ -24,7 +24,7 @@ An introductory understanding of the [TDD Manifesto](https://tddmanifesto.com/) 
    ```
    npm t
    ```
-5. Hack away!
+5. Read the REQS.txt and hack away!
 
 <!-- CONTRIBUTING -->
 ## Contributing
