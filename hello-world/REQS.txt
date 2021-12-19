@@ -1,2 +1,0 @@
-0. The text "Hello, World!" should be rendered to the screen.
-1. The text "Hello, World!" should be designated as an ARIA "heading".

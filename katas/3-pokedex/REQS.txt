@@ -1,0 +1,21 @@
+Given 
+- the pokemon data is not available to the client
+When 
+- the pokemon still have yet to become available to the client
+Then
+- the page should render the text "loading...".
+- the loading text should have a role of "status".
+- the first generation of pokemon should be requested
+
+Given 
+- the pokemon data is not available to the client
+When 
+- the data becomes available to the client
+Then
+- The loading status goes away.
+- A list of cards (chunks of information) should be rendered, one for each pokemon.
+- Each cards should feature a pokemon name, id, types, and default front sprite.
+- The name should have a role of "heading".
+- The types should be encapsulated by ordered list with a role of "list".
+- The types should each have a role of "listitem".
+
