@@ -8,19 +8,22 @@ afterEach(() => {
 });
 
 describe("when the pokemon have yet to become available to the client", () => {     
-   it("should render some status text", () => {
+   let getPokemonSpy;
+
+   beforeEach(() => {
+      getPokemonSpy = jest.spyOn(adapters, "getPokemon");
       render(<Pokedex />);
+   });
+   
+   it("should render some status text", () => {
       expect(screen.getByRole("status")).toBeInTheDocument();
    });
 
    it("should render some status text saying \"loading...\"", () => {
-      render(<Pokedex />);
       expect(screen.getByRole("status").textContent).toBe("loading...");
    });
 
    it("should make one attempt to get the pokemon data", () => {
-      const getPokemonSpy = jest.spyOn(adapters, "getPokemon");
-      render(<Pokedex />);
       expect(getPokemonSpy).toHaveBeenCalledTimes(1);
    });
 });
