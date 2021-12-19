@@ -1,7 +1,6 @@
 # React TDD Katas
 
-This repo provides [katas](https://medium.com/hackernoon/what-are-code-katas-and-why-should-we-care-2e3f1b7e111c) and solutions for practicing Test-Driven Development in the modern React ecosystem. 
-To get up and running, `cd` into your directory of choice and follow the installation 
+This repo provides [katas](https://medium.com/hackernoon/what-are-code-katas-and-why-should-we-care-2e3f1b7e111c) and solutions for practicing Test-Driven Development in the modern React ecosystem.
 
 ## Prerequisites
 
