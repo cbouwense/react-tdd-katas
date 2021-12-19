@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { getPokemon } from "./adapters/storageAdapter";
 
 export const Pokedex = () => {
-   const _isMounted = useRef(true);
+   let _isMounted = true;
    const [ pokemon, setPokemon ] = useState();
    const [ error, setError ] = useState();
    
@@ -10,17 +10,17 @@ export const Pokedex = () => {
       async function getAndSetPokemon() {
          getPokemon()
             .then(p => {
-               if (_isMounted.current) setPokemon(() => p);
+               if (_isMounted) setPokemon(() => p);
             })
             .catch(e => {
-               if (_isMounted.current) {
+               if (_isMounted) {
                   console.error("Encountered error while fetching pokemon: ", e);
                   setError(() => e);
                }
             });
       }
       getAndSetPokemon();
-      return () => { _isMounted.current = false; };
+      return () => { _isMounted = false; };
    }, []);
 
    if (error) return <p role="status">{error}</p>;
