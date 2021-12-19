@@ -13,6 +13,7 @@ export const Pokedex = () => {
                <h2>{p.name}</h2>
                <p>{p.id}</p>
                <p>{p.types}</p>
+               <img src={p.spriteUrl} alt={`${p.name} default front sprite`} />
             </li>
          )}
       </ul>

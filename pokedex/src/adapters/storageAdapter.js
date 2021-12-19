@@ -3,10 +3,11 @@ const specificInfoForEachPokemon = (listOfPokemon) =>
       listOfPokemon.map(
          async (p) => {
             const res = await fetch(p.url);
-            const { id, name, types } = await res.json();
+            const { id, name, sprites, types } = await res.json();
             return {
                id,
                name,
+               spriteUrl: sprites.front_default,
                types: commaSeparatedTypeNames(types)
             };
          }
@@ -18,7 +19,7 @@ const listOfPokemonInResponse = async (response) => {
    return pokemonMetadata.results;
 };
 
-const commaSeparatedTypeNames = (types) => types.map(t => t.type.name).join(", ");
+const commaSeparatedTypeNames = types => types.map(t => t.type.name).join(", ");
 
 export const getPokemonList = async () => {
    const response = await fetch("https://pokeapi.co/api/v2/pokemon/");

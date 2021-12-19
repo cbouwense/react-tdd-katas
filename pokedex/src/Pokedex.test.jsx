@@ -81,7 +81,17 @@ describe("given we have sent off the request for the pokemon", () => {
       });
 
       it("should display an image of the pokemon's default sprite in its card", () => {
-         expect()
+         const sprites = within(pokemonList).getAllByRole("img");
+
+         expect(sprites[0]).toBeInTheDocument();
+         expect(sprites[0]).toHaveAttribute("src", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png");
+         expect(sprites[0]).toHaveAttribute("alt", "bulbasaur default front sprite");
+         expect(sprites[1]).toBeInTheDocument();
+         expect(sprites[1]).toHaveAttribute("src", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png");
+         expect(sprites[1]).toHaveAttribute("alt", "ivysaur default front sprite");
+         expect(sprites[2]).toBeInTheDocument();
+         expect(sprites[2]).toHaveAttribute("src", "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png");
+         expect(sprites[2]).toHaveAttribute("alt", "venusaur default front sprite");
       });
    });
 });
