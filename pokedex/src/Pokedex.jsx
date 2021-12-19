@@ -25,5 +25,14 @@ export const Pokedex = () => {
 
    if (error) return <p role="status">{error}</p>;
    if (!pokemon) return <p role="status">loading...</p>;
-   return <ul>{pokemon.results.map(p => <li key={p.name}></li>)}</ul>;
+   return (
+      <ul>
+         {pokemon.map(p => 
+            <li key={p.name}>
+               <h2>{p.name}</h2>
+               <p data-testid="pokemonId">{p.id}</p>
+            </li>
+         )}
+      </ul>
+   );
 };

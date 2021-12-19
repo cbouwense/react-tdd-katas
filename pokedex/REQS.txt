@@ -11,10 +11,10 @@ or
 Given the pokemon data is available to the client
 When the page is viewed
 Then
-- The loading status goes away.
-- A list of cards (chunks of information) should be rendered, one for each pokemon.
++ The loading status goes away.
++ A list of cards (chunks of information) should be rendered, one for each pokemon.
 - Each cards should feature a pokemon name, id, types, and default sprite.
-- The name should have a role of "heading".
++ The name should have a role of "heading".
 - The id should have a role of "paragraph".
 - The types should be encapsulated by ordered list with a role of "list".
 - The types should each have a role of "listitem".

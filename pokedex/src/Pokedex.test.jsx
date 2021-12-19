@@ -1,7 +1,7 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import { Pokedex } from "./Pokedex";
 import * as adapters from "./adapters/storageAdapter";
-import { makeServerReturnAStatusOf } from "./mockServiceWorker";
+import { makeServerReturnAStatusOf, makeServerReturnThreePokemon } from "./mockServiceWorker";
 
 afterEach(() => {
    jest.restoreAllMocks();
@@ -43,14 +43,34 @@ describe("given we have sent off the request for the pokemon", () => {
    });
 
    describe("when there is a valid response", () => {         
-      it("should display a list to contain the pokemon", async () => {
+      let pokemonList;   
+   
+      beforeEach(async () => {
+         makeServerReturnThreePokemon();
          render(<Pokedex />);
+         pokemonList = await screen.findByRole("list");
+      });
+      
+      it("should display a list to contain the pokemon", async () => {
          await waitFor(() => expect(screen.getByRole("list")).toBeInTheDocument());
       });
 
       it("should display one card for each pokemon in that list", async () => {
-         render(<Pokedex />);
          await waitFor(() => expect(screen.getAllByRole("listitem")).toHaveLength(3));
+      });
+   
+      it("should display the pokemon's name in its card", () => {
+         const pokemonNameElements = within(pokemonList).getAllByRole("heading");
+
+         expect(pokemonNameElements[0].textContent).toBe("bulbasaur");
+         expect(pokemonNameElements[1].textContent).toBe("ivysaur");
+         expect(pokemonNameElements[2].textContent).toBe("venusaur");
+      });
+
+      it("should display the pokemon's id in its card", () => {
+         expect(within(pokemonList).getByText("1")).toBeInTheDocument();
+         expect(within(pokemonList).getByText("2")).toBeInTheDocument();
+         expect(within(pokemonList).getByText("3")).toBeInTheDocument();
       });
    });
 });
