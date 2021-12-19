@@ -75,5 +75,9 @@ describe("given we have sent off the request for the pokemon", () => {
          expect(within(pokemonList).getByText("2")).toBeInTheDocument();
          expect(within(pokemonList).getByText("3")).toBeInTheDocument();
       });
+
+      it("should display a comma-separated list of the pokemon's types in its card", () => {
+         expect(within(pokemonList).getAllByText("grass, poison")).toHaveLength(3);
+      });
    });
 });

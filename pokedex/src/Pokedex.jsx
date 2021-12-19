@@ -11,7 +11,8 @@ export const Pokedex = () => {
          {pokemon.map(p => 
             <li key={p.name}>
                <h2>{p.name}</h2>
-               <p data-testid="pokemonId">{p.id}</p>
+               <p>{p.id}</p>
+               <p>{p.types}</p>
             </li>
          )}
       </ul>
