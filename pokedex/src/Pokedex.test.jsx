@@ -8,10 +8,10 @@ afterEach(() => {
 });
 
 describe("when the pokemon have yet to become available to the client", () => {     
-   let getPokemonSpy;
+   let getPokemonListSpy;
 
    beforeEach(() => {
-      getPokemonSpy = jest.spyOn(adapters, "getPokemon");
+      getPokemonListSpy = jest.spyOn(adapters, "getPokemonList");
       render(<Pokedex />);
    });
    
@@ -24,7 +24,7 @@ describe("when the pokemon have yet to become available to the client", () => {
    });
 
    it("should make one attempt to get the pokemon data", () => {
-      expect(getPokemonSpy).toHaveBeenCalledTimes(1);
+      expect(getPokemonListSpy).toHaveBeenCalledTimes(1);
    });
 });
 
@@ -78,6 +78,10 @@ describe("given we have sent off the request for the pokemon", () => {
 
       it("should display a comma-separated list of the pokemon's types in its card", () => {
          expect(within(pokemonList).getAllByText("grass, poison")).toHaveLength(3);
+      });
+
+      it("should display an image of the pokemon's default sprite in its card", () => {
+         expect()
       });
    });
 });

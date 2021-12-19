@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { getPokemon } from "./adapters/storageAdapter";
+import { getPokemonList } from "./adapters/storageAdapter";
 
 export const usePokedex = () => {
-   const [ pokemon, setPokemon ] = useState();
+   const [ pokemonList, setPokemonList ] = useState();
    const [ error, setError ] = useState();
    
    useEffect(() => {
       async function getAndSetPokemon() {
-         getPokemon()
+         getPokemonList()
             .then(p => {
-               setPokemon(() => p);
+               setPokemonList(() => p);
             })
             .catch(e => {
                console.error("Encountered error while fetching pokemon: ", e);
@@ -19,5 +19,5 @@ export const usePokedex = () => {
       getAndSetPokemon();
    }, []);
 
-   return { error, pokemon };
+   return { error, pokemonList };
 };
