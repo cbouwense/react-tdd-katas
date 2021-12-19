@@ -17,7 +17,7 @@ afterAll(() => server.close());
 
 global.console = {
    debug: console.debug,
-   error: jest.fn(),
+   error: console.error,
    info: console.info,
    log: console.log,
    warn: console.warn,

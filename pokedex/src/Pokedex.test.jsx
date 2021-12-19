@@ -3,8 +3,15 @@ import { Pokedex } from "./Pokedex";
 import * as adapters from "./adapters/storageAdapter";
 import { makeServerReturnAStatusOf, makeServerReturnThreePokemon } from "./mockServiceWorker";
 
+const silenceErrorConsole = () => {
+   window.console.error = jest.fn();
+}
+
+const originalErrorLog = window.console.error;
+
 afterEach(() => {
    jest.restoreAllMocks();
+   window.console.error = originalErrorLog; 
 });
 
 describe("when the pokemon have yet to become available to the client", () => {     
@@ -31,6 +38,7 @@ describe("when the pokemon have yet to become available to the client", () => {
 describe("given we have sent off the request for the pokemon", () => {      
    describe("when there is a 400 error status", () => {         
       it("should display a status with the error message", async () => {   
+         silenceErrorConsole();
          makeServerReturnAStatusOf(404);
          render(<Pokedex />);
          await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Not Found"));
@@ -39,6 +47,7 @@ describe("given we have sent off the request for the pokemon", () => {
    
    describe("when there is a 500 error status", () => {        
       it("should display a status with the error message", async () => {
+         silenceErrorConsole();
          makeServerReturnAStatusOf(500);
          render(<Pokedex />);
          await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Internal Server Error"));
